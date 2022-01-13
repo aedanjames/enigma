@@ -11,6 +11,10 @@ RSpec.describe Enigma do
   expect(@enigma).to be_a(Enigma)
   end
 
+  it 'has an attribute' do
+  expect(@enigma.char_set.count).to eq(27)
+  end
+
 # encrypt a message with a key and a date
   xit '#encrypt' do
     actual = @enigma.encrypt("hello world", 02715, "040895")
@@ -34,6 +38,6 @@ RSpec.describe Enigma do
   end
 
   xit '#decrypt a message with a key (todays date)' do
-    
+
   end
 end
