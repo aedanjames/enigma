@@ -19,6 +19,11 @@ RSpec.describe Enigma do
   expect(@enigma.key_generator).to be_a(Integer)
   end
 
+  it '#todays_date' do
+  actual = @enigma.todays_date
+  expect(@enigma.todays_date).to be_a(String)
+  end
+
 # encrypt a message with a key and a date
   it '#encrypt' do
     actual = @enigma.encrypt("hello world", 02715, "040895")
