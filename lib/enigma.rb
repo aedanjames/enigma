@@ -19,6 +19,7 @@ class Enigma
   end
 
   def encrypt(message, key = key_generator, date = todays_date)
+    message.downcase!
     encrypted_message = []
     offset = offset(date) # 1025
     offset_array = offset.to_s.split(//) # ["1", "0", "2", "5"]
