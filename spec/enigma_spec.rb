@@ -30,7 +30,7 @@ RSpec.describe Enigma do
 
 # encrypt a message with a key and a date
   it '#encrypt' do
-    actual = @enigma.encrypt("hello world", "02715", "040895")
+    actual = @enigma.encrypt("HELLO world", "02715", "040895")
     # actual = @enigma.encrypt("hello world")
     expected = {
       encryption: "keder ohulw",
@@ -40,7 +40,7 @@ RSpec.describe Enigma do
     expect(actual).to eq(expected)
   end
 
-  xit '#decrypt' do
+  it '#decrypt' do
     @enigma.encrypt("hello world", 02715, "040895")
     actual = @enigma.decrypt("keder ohulw", "02715", "040895")
     expected = {
@@ -49,9 +49,5 @@ RSpec.describe Enigma do
       date: "040895"
     }
     expect(actual).to eq(expected)
-  end
-
-  xit '#decrypt a message with a key (todays date)' do
-
   end
 end
