@@ -15,10 +15,23 @@ RSpec.describe Enigma do
   expect(@enigma.char_set.count).to eq(27)
   end
 
+  it '#key_generator' do
+  expect(@enigma.key_generator.length).to eq(5)
+  end
+
+  it '#todays_date' do
+  actual = @enigma.todays_date
+  expect(@enigma.todays_date).to be_a(String)
+  end
+
+  it '#offset' do
+  expect(@enigma.offset("040895")).to eq(1025)
+  end
+
 # encrypt a message with a key and a date
   it '#encrypt' do
-    actual = @enigma.encrypt("hello world")
-    # actual = @enigma.encrypt("hello world", 02715, "040895")
+    actual = @enigma.encrypt("hello world", "02715", "040895")
+    # actual = @enigma.encrypt("hello world")
     expected = {
       encryption: "keder ohulw",
       key: "02715",
