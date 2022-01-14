@@ -9,14 +9,16 @@ class Enigma
     key = rand(99999).to_s.rjust(5, "0")
   end
 
-  def offset_generator
-
+  def offset(date)
+    offset = (date.to_i ** 2).to_s.slice(-4..-1).to_i
+    offset
   end
 
   def encrypt(message, key = key_generator, date = todays_date)
     encrypted_result = {}
     message_array = message.split(//)
     require "pry"; binding.pry
+    offset(date)
     key = key.to_s
     a_key = key.slice(0..1).to_i
     b_key = key.slice(1..2).to_i
