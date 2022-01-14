@@ -9,11 +9,13 @@ class Enigma
     key = rand(99999).to_s.rjust(5, "0")
   end
 
-  def encrypt(message, key = nil, date = nil)
+  def offset_generator
+
+  end
+
+  def encrypt(message, key = key_generator, date = todays_date)
     encrypted_result = {}
     message_array = message.split(//)
-    if key == nil then key = key_generator
-    end
     require "pry"; binding.pry
     key = key.to_s
     a_key = key.slice(0..1).to_i
