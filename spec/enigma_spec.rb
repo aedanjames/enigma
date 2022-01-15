@@ -50,4 +50,9 @@ RSpec.describe Enigma do
     }
     expect(actual).to eq(expected)
   end
+
+  it 'can encrypt with todays_date/generated key' do
+    expected = @enigma.encrypt("PIzza for LiFe")
+    expect(expected).to be_a(Hash)
+  end
 end
