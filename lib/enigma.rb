@@ -1,3 +1,4 @@
+# Make methods into modules? So each file has one job?
 require 'date'
 class Enigma
   attr_reader :char_set
@@ -10,7 +11,6 @@ class Enigma
   end
 
   def offset(date)
-    offset_array = []
     offset = (date.to_i ** 2).to_s.slice(-4..-1).to_i
   end
 
@@ -30,7 +30,11 @@ class Enigma
     c_key = key.slice(2..3).to_i #71
     d_key = key.slice(3..4).to_i #15
     message_array.each_with_index do |char, index|
-      if index % 4 == 0
+      if char == "\n"
+        message_array.delete(char)
+      elsif @char_set.include?(char) == false
+        encrypted_message << char
+      elsif index % 4 == 0
         position_a = @char_set.rotate(a_key + offset_array[0].to_i)[@char_set.index(char)] #3
           encrypted_message << position_a
       elsif index % 4 == 1
@@ -53,18 +57,21 @@ class Enigma
   end
 
   def decrypt(message, key, date = todays_date)
-    offset = offset(date) # 1025
+    offset = offset(date)
     offset_array = offset.to_s.split(//)
     message_array = message.split(//)
     decrypted_message = []
     key = key.to_s
-    a_key = key.slice(0..1).to_i #02
-    b_key = key.slice(1..2).to_i #27
-    c_key = key.slice(2..3).to_i #71
-    d_key = key.slice(3..4).to_i #15
+    a_key = key.slice(0..1).to_i
+    b_key = key.slice(1..2).to_i
+    c_key = key.slice(2..3).to_i
+    d_key = key.slice(3..4).to_i
     message_array.each_with_index do |char, index|
       # multiply rotation by -1 to reverse previous rotation, then call the index of each character
-      if index % 4 == 0
+      if char == "\n" then message_array.delete(char)
+      elsif @char_set.include?(char) == false
+        decrypted_message << char
+      elsif index % 4 == 0
         position_a = @char_set.rotate((a_key + offset_array[0].to_i) * -1)[@char_set.index(char)]
           decrypted_message << position_a
       elsif index % 4 == 1
