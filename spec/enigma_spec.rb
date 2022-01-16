@@ -31,13 +31,38 @@ RSpec.describe Enigma do
 # encrypt a message with a key and a date
   it '#encrypt' do
     actual = @enigma.encrypt("HELLO world", "02715", "040895")
-    # actual = @enigma.encrypt("hello world")
     expected = {
       encryption: "keder ohulw",
       key: "02715",
       date: "040895"
     }
     expect(actual).to eq(expected)
+  end
+
+  it 'can delete "\n" generated from encryption/decryption' do
+    actual = @enigma.encrypt("HELLO world\n", "02715", "040895")
+    expected = {
+      encryption: "keder ohulw",
+      key: "02715",
+      date: "040895"
+    }
+    expect(actual).to eq(expected)
+  end
+
+  it 'can retain special characters in correct position' do
+    actual = @enigma.encrypt("HELLO, world", "02715", "040895")
+    expected = {
+      encryption: "keder,sprrdx",
+      key: "02715",
+      date: "040895"
+    }
+    expect(actual).to eq(expected)
+    actual_2 = @enigma.decrypt("keder,sprrdx", "02715", "040895")
+    expected_2 = {
+      decryption: "hello, world",
+      key: "02715",
+      date: "040895"
+    }
   end
 
   it '#decrypt' do
@@ -49,5 +74,10 @@ RSpec.describe Enigma do
       date: "040895"
     }
     expect(actual).to eq(expected)
+  end
+
+  it 'can encrypt with todays_date/generated key' do
+    expected = @enigma.encrypt("PIzza for LiFe")
+    expect(expected).to be_a(Hash)
   end
 end
