@@ -1,5 +1,5 @@
 # enigma
-Turing 2111 BE Mod 1 Final Solo Project. \n 
+Turing 2111 BE Mod 1 Final Solo Project.  
 Encryption is based on the Caesar Cipher
 
 ## To Encrypt a message
