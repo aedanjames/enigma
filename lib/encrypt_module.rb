@@ -1,15 +1,15 @@
 module Encrypt
   def encrypt(message, key = key_generator, date = todays_date)
-    offset = offset(date) # 1025
+    offset = offset(date)
     offset_array = offset.to_s.split(//)
     message.downcase!
-    message_array = message.split(//) # ["h" "e" "l" "l" "o" " " "w" "o" "r" "l" "d"]
+    message_array = message.split(//)
     encrypted_message = []
     key = key.to_s
-    a_key = key.slice(0..1).to_i #02
-    b_key = key.slice(1..2).to_i #27
-    c_key = key.slice(2..3).to_i #71
-    d_key = key.slice(3..4).to_i #15
+    a_key = key.slice(0..1).to_i
+    b_key = key.slice(1..2).to_i
+    c_key = key.slice(2..3).to_i
+    d_key = key.slice(3..4).to_i
     message_array.each_with_index do |char, index|
       if char == "\n"
         message_array.delete(char)
