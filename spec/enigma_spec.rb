@@ -38,6 +38,11 @@ RSpec.describe Enigma do
     expect(actual).to eq(expected)
   end
 
+  it 'can encrypt with todays_date/generated key' do
+    expected = @enigma.encrypt("PIzza for LiFe")
+    expect(expected).to be_a(Hash)
+  end
+
   it 'can delete "\n" generated from encryption/decryption' do
     actual = @enigma.encrypt("HELLO world\n", "02715", "040895")
     expected = {
@@ -73,10 +78,5 @@ RSpec.describe Enigma do
       date: "040895"
     }
     expect(actual).to eq(expected)
-  end
-
-  it 'can encrypt with todays_date/generated key' do
-    expected = @enigma.encrypt("PIzza for LiFe")
-    expect(expected).to be_a(Hash)
   end
 end
